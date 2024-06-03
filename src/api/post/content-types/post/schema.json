@@ -45,7 +45,7 @@
     "topic": {
       "type": "string"
     },
-    "votelogs": {
+    "votes": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::votelog.votelog",

@@ -54,9 +54,9 @@
         "shared.slider"
       ]
     },
-    "votelog": {
+    "votes": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::votelog.votelog",
       "mappedBy": "article"
     }

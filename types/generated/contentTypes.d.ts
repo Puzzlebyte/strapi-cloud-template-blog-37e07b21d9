@@ -853,9 +853,9 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     blocks: Attribute.DynamicZone<
       ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
     >;
-    votelog: Attribute.Relation<
+    votes: Attribute.Relation<
       'api::article.article',
-      'oneToOne',
+      'oneToMany',
       'api::votelog.votelog'
     >;
     createdAt: Attribute.DateTime;
@@ -1054,7 +1054,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::category.category'
     >;
     topic: Attribute.String;
-    votelogs: Attribute.Relation<
+    votes: Attribute.Relation<
       'api::post.post',
       'oneToMany',
       'api::votelog.votelog'
@@ -1075,6 +1075,7 @@ export interface ApiVotelogVotelog extends Schema.CollectionType {
     singularName: 'votelog';
     pluralName: 'votelogs';
     displayName: 'votelog';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1093,7 +1094,7 @@ export interface ApiVotelogVotelog extends Schema.CollectionType {
     >;
     article: Attribute.Relation<
       'api::votelog.votelog',
-      'oneToOne',
+      'manyToOne',
       'api::article.article'
     >;
     createdAt: Attribute.DateTime;
