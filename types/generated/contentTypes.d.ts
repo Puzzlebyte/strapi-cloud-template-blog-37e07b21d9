@@ -853,6 +853,11 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     blocks: Attribute.DynamicZone<
       ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
     >;
+    votelog: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'api::votelog.votelog'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1049,12 +1054,62 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::category.category'
     >;
     topic: Attribute.String;
+    votelogs: Attribute.Relation<
+      'api::post.post',
+      'oneToMany',
+      'api::votelog.votelog'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVotelogVotelog extends Schema.CollectionType {
+  collectionName: 'votelogs';
+  info: {
+    singularName: 'votelog';
+    pluralName: 'votelogs';
+    displayName: 'votelog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    slug: Attribute.UID;
+    user: Attribute.Relation<
+      'api::votelog.votelog',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    post: Attribute.Relation<
+      'api::votelog.votelog',
+      'manyToOne',
+      'api::post.post'
+    >;
+    article: Attribute.Relation<
+      'api::votelog.votelog',
+      'oneToOne',
+      'api::article.article'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::votelog.votelog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::votelog.votelog',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1084,6 +1139,7 @@ declare module '@strapi/types' {
       'api::comment.comment': ApiCommentComment;
       'api::global.global': ApiGlobalGlobal;
       'api::post.post': ApiPostPost;
+      'api::votelog.votelog': ApiVotelogVotelog;
     }
   }
 }

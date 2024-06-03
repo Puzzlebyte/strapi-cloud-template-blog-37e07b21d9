@@ -44,6 +44,12 @@
     },
     "topic": {
       "type": "string"
+    },
+    "votelogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::votelog.votelog",
+      "mappedBy": "post"
     }
   }
 }

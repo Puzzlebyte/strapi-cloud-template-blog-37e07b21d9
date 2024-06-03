@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "votelogs",
+  "info": {
+    "singularName": "votelog",
+    "pluralName": "votelogs",
+    "displayName": "votelog"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "votelogs"
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article",
+      "inversedBy": "votelog"
+    }
+  }
+}
