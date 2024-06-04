@@ -53,6 +53,9 @@
     },
     "blocks": {
       "type": "blocks"
+    },
+    "rating": {
+      "type": "decimal"
     }
   }
 }

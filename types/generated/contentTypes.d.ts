@@ -856,6 +856,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::votelog.votelog'
     >;
     blocks: Attribute.Blocks;
+    rating: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
