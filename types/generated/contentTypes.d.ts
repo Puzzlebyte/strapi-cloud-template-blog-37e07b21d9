@@ -850,14 +850,12 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
-    blocks: Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
     votes: Attribute.Relation<
       'api::article.article',
       'oneToMany',
       'api::votelog.votelog'
     >;
+    blocks: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
