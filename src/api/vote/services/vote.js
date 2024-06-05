@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * votelog service
+ * vote service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::votelog.votelog');
+module.exports = createCoreService('api::vote.vote');

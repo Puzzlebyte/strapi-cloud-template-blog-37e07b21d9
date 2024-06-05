@@ -850,13 +850,13 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
+    blocks: Attribute.Blocks;
+    rating: Attribute.Decimal;
     votes: Attribute.Relation<
       'api::article.article',
       'oneToMany',
-      'api::votelog.votelog'
+      'api::vote.vote'
     >;
-    blocks: Attribute.Blocks;
-    rating: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1053,11 +1053,23 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::category.category'
     >;
     topic: Attribute.String;
-    votes: Attribute.Relation<
-      'api::post.post',
-      'oneToMany',
-      'api::votelog.votelog'
-    >;
+    votes_nick: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    votes_chris: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    votes: Attribute.Relation<'api::post.post', 'oneToMany', 'api::vote.vote'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1068,48 +1080,30 @@ export interface ApiPostPost extends Schema.CollectionType {
   };
 }
 
-export interface ApiVotelogVotelog extends Schema.CollectionType {
-  collectionName: 'votelogs';
+export interface ApiVoteVote extends Schema.CollectionType {
+  collectionName: 'votes';
   info: {
-    singularName: 'votelog';
-    pluralName: 'votelogs';
-    displayName: 'votelog';
-    description: '';
+    singularName: 'vote';
+    pluralName: 'votes';
+    displayName: 'Vote';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    slug: Attribute.UID;
-    user: Attribute.Relation<
-      'api::votelog.votelog',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    post: Attribute.Relation<
-      'api::votelog.votelog',
-      'manyToOne',
-      'api::post.post'
-    >;
+    userId: Attribute.String;
+    post: Attribute.Relation<'api::vote.vote', 'manyToOne', 'api::post.post'>;
     article: Attribute.Relation<
-      'api::votelog.votelog',
+      'api::vote.vote',
       'manyToOne',
       'api::article.article'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::votelog.votelog',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::vote.vote', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::votelog.votelog',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::vote.vote', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1139,7 +1133,7 @@ declare module '@strapi/types' {
       'api::comment.comment': ApiCommentComment;
       'api::global.global': ApiGlobalGlobal;
       'api::post.post': ApiPostPost;
-      'api::votelog.votelog': ApiVotelogVotelog;
+      'api::vote.vote': ApiVoteVote;
     }
   }
 }

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * votelog router
+ * vote router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::votelog.votelog');
+module.exports = createCoreRouter('api::vote.vote');

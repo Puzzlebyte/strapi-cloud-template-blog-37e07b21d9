@@ -45,10 +45,20 @@
     "topic": {
       "type": "string"
     },
+    "votes_nick": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "votes_chris": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
     "votes": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::votelog.votelog",
+      "target": "api::vote.vote",
       "mappedBy": "post"
     }
   }

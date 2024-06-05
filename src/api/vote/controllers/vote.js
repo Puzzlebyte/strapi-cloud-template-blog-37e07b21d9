@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * votelog controller
+ * vote controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::votelog.votelog');
+module.exports = createCoreController('api::vote.vote');
