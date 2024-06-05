@@ -9,5 +9,14 @@ module.exports = {
        middlewares: [],
      },
     },
+    {
+      method: 'POST',
+      path: '/voting/switch',
+      handler: 'voting.switchVote',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+     },
   ],
 };
