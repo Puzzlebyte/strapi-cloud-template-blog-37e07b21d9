@@ -5,6 +5,25 @@
  */
 
 module.exports = {
+  getVote: async (ctx, next) => {
+    try {
+      const { postId, userId } = ctx.request.body;
+
+      if (!postId || !userId)
+        throw new Error(
+          "Missing one or more of required fields: postId, userId, articleId"
+        );
+
+      const vote = await strapi
+        .service("api::voting.voting")
+        .getVote({ postId, userId });
+
+      return vote;
+    } catch (err) {
+      throw new Error("Something went wrong.");
+    }
+  },
+
   vote: async (ctx, next) => {
     try {
       const { postId, userId, articleId } = ctx.request.body;

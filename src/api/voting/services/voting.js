@@ -5,6 +5,16 @@
  */
 
 module.exports = () => ({
+  async getVote({ postId, userId }) {
+    const existingVote = await strapi.db.query("api::vote.vote").findOne({
+      where: {
+        post: postId,
+        userId: userId,
+      },
+    });
+
+    return existingVote;
+  },
   async vote({ postId, userId, articleId }) {
     console.log("Service");
 
