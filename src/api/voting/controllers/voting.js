@@ -11,7 +11,7 @@ module.exports = {
 
       if (!postId || !userId)
         throw new Error(
-          "Missing one or more of required fields: postId, userId, articleId"
+          "Missing one or more of required fields: postId, userId"
         );
 
       const vote = await strapi
