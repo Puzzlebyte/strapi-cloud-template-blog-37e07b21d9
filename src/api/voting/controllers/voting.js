@@ -20,6 +20,8 @@ module.exports = {
 
       return vote;
     } catch (err) {
+      console.log("ERROR:", err);
+
       throw new Error("Something went wrong.");
     }
   },
