@@ -2,7 +2,7 @@ module.exports = {
   routes: [
     {
       method: 'GET',
-      path: '/voting',
+      path: '/voting/getVote',
       handler: 'voting.getVote',
       config: {
         policies: [],
